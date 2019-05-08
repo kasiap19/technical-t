@@ -80,12 +80,21 @@ export default {
                     this.average = sum / total
                     
                     // create popup to display total properties in given area and average price of properties
-                    marker.bindPopup(
+                    if(this.results.result_count === 0) {
+                       marker.bindPopup(
+                        "<div class='custom'><div class='custom__total'></div><div class='custom__content'><p>No properties</p></div></div>",
+                        {autoClose:false,
+                        closeOnClick:false}
+                    ).openPopup() 
+                    }
+                    else {
+                        marker.bindPopup(
                         "<div class='custom'><div class='custom__total'><span>"+this.results.result_count+" Properties</span></div><div class='custom__content'><p>Average price: <b>£"+this.average.toFixed(2)+"</b></p></div></div>",
                         {autoClose:false,
                         closeOnClick:false}
-                    ).openPopup()
-
+                        ).openPopup()
+                    }
+                    
                     
                     // create a radius and draw the circle 
                     var radius = 100;
